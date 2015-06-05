@@ -20,10 +20,9 @@ class StepsController < ApplicationController
     else
       @step.item_id = params[:item_id]
     end
-    @step.item_id = params[:item_id]
     @step.step_number = params[:step_number]
-    @step.completed = params[:completed]
-    @step.user_id = params[:user_id]
+    @step.completed = params.fetch(:completed,false)
+    @step.user_id = current_user.id
     @step.detail = params[:detail]
 
     if @step.save

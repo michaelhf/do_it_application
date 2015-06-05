@@ -14,9 +14,9 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new
     @item.user_id = current_user.id
-    @item.finished = false
+    @item.finished = params.fetch(:finished,false)
     @item.title = params[:title]
-    @item.private = params[:private]
+    @item.private = params.fetch(:private,false)
 
     if @item.save
       r = Ranking.find_or_create_by(user_id: @item.user_id)

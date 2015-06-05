@@ -1,12 +1,12 @@
 <!-- Validation failure messages -->
 
 <% if @step.errors.any? %>
-  <% @step.errors.full_messages.each do |message| %>
-    <div class="alert alert-dismissable alert-danger">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= message %>
-    </div>
-  <% end %>
+<% @step.errors.full_messages.each do |message| %>
+<div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  <%= message %>
+</div>
+<% end %>
 <% end %>
 
 <!-- Responsive panel example -->
@@ -28,65 +28,56 @@
               Item
             </label>
             <div class="col-sm-10">
-              <input type="text" id="item_id" name="item_id" placeholder="Item" class="form-control" value="<%= @step.item_id %>">
-            </div>
-          </div>
+             <%= select_tag(:item_id, options_from_collection_for_select(Item.where(user_id: current_user.id), :id, :title), :class => "form-control")%>
+           </div>
+         </div>
 
-          <!-- Label and input for step_number -->
-          <div class="form-group">
-            <label for="step_number" class="col-sm-2 control-label">
-              Step number
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="step_number" name="step_number" placeholder="Step number" class="form-control" value="<%= @step.step_number %>">
-            </div>
+         <!-- Label and input for step_number -->
+         <div class="form-group">
+          <label for="step_number" class="col-sm-2 control-label">
+            Step number
+          </label>
+          <div class="col-sm-10">
+            <input type="text" id="step_number" name="step_number" placeholder="Step number" class="form-control" value="<%= @step.step_number %>">
           </div>
+        </div>
 
-          <!-- Label and input for completed -->
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
-                <label for="completed">
-                  <input type="checkbox" id="completed" name="completed" value="1" <%= "checked" if @step.completed %>>
-                  Completed
-                </label>
-              </div>
+        <!-- Label and input for completed -->
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label for="completed">
+                <input type="checkbox" id="completed" name="completed" value="1" <%= "checked" if @step.completed %>>
+                Completed
+              </label>
             </div>
           </div>
+        </div>
 
-          <!-- Label and input for user_id -->
-          <div class="form-group">
-            <label for="user_id" class="col-sm-2 control-label">
-              User
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @step.user_id %>">
-            </div>
-          </div>
 
-          <!-- Label and input for detail -->
-          <div class="form-group">
-            <label for="detail" class="col-sm-2 control-label">
-              Detail
-            </label>
-            <div class="col-sm-10">
-              <textarea id="detail" name="detail" placeholder="Detail" class="form-control" rows="3"><%= @step.detail %></textarea>
-            </div>
+        <!-- Label and input for detail -->
+        <div class="form-group">
+          <label for="detail" class="col-sm-2 control-label">
+            Detail
+          </label>
+          <div class="col-sm-10">
+            <textarea id="detail" name="detail" placeholder="Detail" class="form-control" rows="3"><%= @step.detail %></textarea>
           </div>
+        </div>
 
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-success">
-                Create Step
-              </button>
-              or
-              <a href="/steps">Cancel</a>
-            </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button class="btn btn-success">
+              Create Step
+            </button>
+            or
+            <a href="/steps">Cancel</a>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   </div>
+</div>
 </div>
 
 <!-- End responsive panel example -->

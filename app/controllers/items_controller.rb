@@ -13,8 +13,8 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new
-    @item.user_id = params[:user_id]
-    @item.finished = params[:finished]
+    @item.user_id = current_user.id
+    @item.finished = false
     @item.title = params[:title]
     @item.private = params[:private]
 

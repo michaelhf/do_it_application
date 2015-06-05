@@ -23,14 +23,14 @@
           <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
           <!-- Label and input for item_id -->
-          <div class="form-group">
+<!--           <div class="form-group">
             <label for="item_id" class="col-sm-2 control-label">
               Item
             </label>
             <div class="col-sm-10">
               <input type="text" id="item_id" name="item_id" placeholder="Item" class="form-control" value="<%= @step.item_id %>">
             </div>
-          </div>
+          </div> -->
 
           <!-- Label and input for step_number -->
           <div class="form-group">
@@ -54,15 +54,6 @@
             </div>
           </div>
 
-          <!-- Label and input for user_id -->
-          <div class="form-group">
-            <label for="user_id" class="col-sm-2 control-label">
-              User
-            </label>
-            <div class="col-sm-10">
-              <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @step.user_id %>">
-            </div>
-          </div>
 
           <!-- Label and input for detail -->
           <div class="form-group">

@@ -1,6 +1,7 @@
 class RankingsController < ApplicationController
+  before_action :authenticate_user!, :except => [:index]
   def index
-    @rankings = Ranking.all
+    @rankings = Ranking.order("completed DESC")
   end
 
   def show

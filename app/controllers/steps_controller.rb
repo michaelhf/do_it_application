@@ -13,6 +13,13 @@ class StepsController < ApplicationController
 
   def create
     @step = Step.new
+
+    if @item.present?
+      then
+      @step.item_id = @item.id
+    else
+      @step.item_id = params[:item_id]
+    end
     @step.item_id = params[:item_id]
     @step.step_number = params[:step_number]
     @step.completed = params[:completed]

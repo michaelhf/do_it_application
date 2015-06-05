@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   # Routes for the Item_follower resource:
   # CREATE
   get "/item_followers/new", :controller => "item_followers", :action => "new"

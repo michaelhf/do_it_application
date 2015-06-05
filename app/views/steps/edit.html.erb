@@ -1,0 +1,93 @@
+<!-- Validation failure messages -->
+
+<% if @step.errors.any? %>
+  <% @step.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<!-- Responsive panel example -->
+
+<div class="row">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Edit Step #<%= @step.id %></h3>
+      </div>
+      <div class="panel-body">
+        <form action="/update_step/<%= @step.id %>" method="post" class="form-horizontal">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+          <!-- Label and input for item_id -->
+          <div class="form-group">
+            <label for="item_id" class="col-sm-2 control-label">
+              Item
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="item_id" name="item_id" placeholder="Item" class="form-control" value="<%= @step.item_id %>">
+            </div>
+          </div>
+
+          <!-- Label and input for step_number -->
+          <div class="form-group">
+            <label for="step_number" class="col-sm-2 control-label">
+              Step number
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="step_number" name="step_number" placeholder="Step number" class="form-control" value="<%= @step.step_number %>">
+            </div>
+          </div>
+
+          <!-- Label and input for completed -->
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label for="completed">
+                  <input type="checkbox" id="completed" name="completed" value="1" <%= "checked" if @step.completed %>>
+                  Completed
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Label and input for user_id -->
+          <div class="form-group">
+            <label for="user_id" class="col-sm-2 control-label">
+              User
+            </label>
+            <div class="col-sm-10">
+              <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @step.user_id %>">
+            </div>
+          </div>
+
+          <!-- Label and input for detail -->
+          <div class="form-group">
+            <label for="detail" class="col-sm-2 control-label">
+              Detail
+            </label>
+            <div class="col-sm-10">
+              <textarea id="detail" name="detail" placeholder="Detail" class="form-control" rows="3"><%= @step.detail %></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button class="btn btn-warning">
+                Update Step
+              </button>
+              or
+              <a href="/steps/<%= @step.id %>">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- End responsive panel example -->

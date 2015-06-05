@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   # CREATE
   get "/steps/new", :controller => "steps", :action => "new"
   post "/create_step", :controller => "steps", :action => "create"
+  post "/create_step_stay", :controller => "steps", :action => "create_stay"
 
   # READ
   get "/steps", :controller => "steps", :action => "index"

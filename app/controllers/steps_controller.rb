@@ -32,6 +32,26 @@ class StepsController < ApplicationController
     end
   end
 
+    def create_stay
+
+    @step = Step.new
+    @step.item_id = params[:item_id]
+
+    @step.step_number = params[:step_number]
+    @step.completed = params.fetch(:completed,false)
+    @step.user_id = current_user.id
+    @step.detail = params[:detail]
+
+    if @step.save
+      currentpage = "/items/" + @step.item_id.to_s
+      redirect_to currentpage,  :notice => "Step created successfully."
+
+    else
+     redirect_to s :alert => "Step was not created."
+
+    end
+  end
+
   def edit
     @step = Step.find(params[:id])
   end

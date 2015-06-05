@@ -57,7 +57,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
+
     @item = Item.find(params[:id])
+       r = Ranking.find_or_create_by(user_id: @item.user_id)
     if r.completed == nil
       then
       r.completed = 1

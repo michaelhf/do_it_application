@@ -22,7 +22,13 @@
               <dd><%= @item.title %></dd>
 
               <dt>Private</dt>
-              <dd><%= @item.private %></dd>
+              <dd><%= @item.private == true %></dd>
+
+              <% Step.where(item_id: @item.id).order("step_number asc").each do |thing| %>
+  <dt>step #<%=thing.step_number %><dt>
+  <dd><%=thing.detail %></dd>
+<% end %>
+
 
             </dl>
             <div class="btn-group btn-group-justified">

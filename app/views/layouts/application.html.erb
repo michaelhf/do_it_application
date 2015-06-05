@@ -41,21 +41,21 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="/item_followers">Item Followers</a></li>
           <li><a href="/rankings">Rankings</a></li>
+          <li><a href="/items">Items</a></li>
           <li><a href="/steps">Steps</a></li>
           <li><a href="/followers">Followers</a></li>
-          <li><a href="/items">Items</a></li>
+          <li><a href="/item_followers">Item Followers</a></li>
           <li><a href="#">About</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <% if 1 > 2 %>
-            <li><a href="/users/edit">Oscar the Grouch</a></li>
-            <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Sign out</a></li>
+          <% if current_user != nil %>
+          <li><a href="/users/edit"><%=current_user.email%></a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Sign out</a></li>
           <% else %>
-            <li><a href="/users/sign_up">Sign up</a></li>
-            <li><a href="/users/sign_in">Sign in</a></li>
+          <li><a href="/users/sign_up">Sign up</a></li>
+          <li><a href="/users/sign_in">Sign in</a></li>
           <% end %>
         </ul>
       </div><!-- /.navbar-collapse -->
@@ -64,17 +64,17 @@
 
   <div class="container">
     <% if notice.present? %>
-      <div class="alert alert-dismissable alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= notice %>
-      </div>
+    <div class="alert alert-dismissable alert-success">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= notice %>
+    </div>
     <% end %>
 
     <% if alert.present? %>
-      <div class="alert alert-dismissable alert-warning">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <%= alert %>
-      </div>
+    <div class="alert alert-dismissable alert-warning">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= alert %>
+    </div>
     <% end %>
 
     <%= yield %>

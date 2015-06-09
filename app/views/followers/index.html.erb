@@ -18,19 +18,29 @@
 <hr>
 
 <div class="row isotope-container">
-<% @followers.each do |follower| %>
+  <% @followers.each do |follower| %>
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Follower #<%= follower.id %></h3>
+        <h3 class="panel-title"><%= follower.friend.email %></h3>
       </div>
       <div class="panel-body">
         <dl>
-          <dt>User</dt>
-          <dd><%= follower.user_id %></dd>
+          <dt>Username</dt>
+          <dd><%= follower.friend.username %></dd>
 
-          <dt>Friend</dt>
-          <dd><%= follower.friend_id %></dd>
+          <dt>Items:</dt>
+          <ul>
+            <% Item.where(user_id: follower.friend.id).each do |thing| %>
+            <li><%= thing.title %></li>
+            <dt> Steps:</dt>
+
+              <%  Step.where(item_id: thing.id).order("step_number ASC").each do |thing2| %>
+              <dd><%= thing2.step_number%>: <%= thing2.detail%></dd>
+              <% end %>
+
+            <% end %>
+          </ul>
 
         </dl>
         <div class="btn-group btn-group-justified">
@@ -49,7 +59,7 @@
       </div>
     </div>
   </div>
-<% end %>
+  <% end %>
 </div>
 
 <!-- You can ignore the following. It's a quick and dirty example of how to get a Pinterest-style layout with quick search. -->

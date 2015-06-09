@@ -1,6 +1,6 @@
 class ItemFollowersController < ApplicationController
   def index
-    @item_followers = ItemFollower.all
+    @item_followers = ItemFollower.where(user_id: current_user.id)
   end
 
   def show

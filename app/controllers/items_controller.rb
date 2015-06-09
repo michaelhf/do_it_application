@@ -1,11 +1,12 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = Item.where(user_id: current_user.id)
   end
 
   def show
     @item = Item.find(params[:id])
     @step = Step.new
+    @current_steps = Step.where(item_id: @item.id).order("step_number asc")
   end
 
   def new
@@ -45,7 +46,6 @@ class ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
 
-    @item.user_id = params[:user_id]
     @item.finished = params[:finished]
     @item.title = params[:title]
     @item.private = params[:private]

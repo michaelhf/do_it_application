@@ -10,5 +10,7 @@ class User < ActiveRecord::Base
 has_many :followers , :class_name => "Follower", :foreign_key => "user_id" , dependent: :destroy
 has_many :items , dependent: :destroy
 has_one :ranking, dependent: :destroy
+validates :email, presence: true
+validates :username, presence: true
 
 end

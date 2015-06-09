@@ -1,6 +1,6 @@
 class StepsController < ApplicationController
   def index
-    @steps = Step.all
+    @steps = Step.where(user_id: current_user.id)
   end
 
   def show
@@ -47,7 +47,8 @@ class StepsController < ApplicationController
       redirect_to currentpage,  :notice => "Step created successfully."
 
     else
-     redirect_to s :alert => "Step was not created."
+            currentpage = "/items/" + @step.item_id.to_s
+     redirect_to currentpage, :notice => "Step was not created."
 
     end
   end
@@ -59,10 +60,8 @@ class StepsController < ApplicationController
   def update
     @step = Step.find(params[:id])
 
-    @step.item_id = params[:item_id]
     @step.step_number = params[:step_number]
     @step.completed = params[:completed]
-    @step.user_id = params[:user_id]
     @step.detail = params[:detail]
 
     if @step.save

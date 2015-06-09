@@ -1,6 +1,6 @@
 class FollowersController < ApplicationController
   def index
-    @followers = Follower.all
+    @followers = Follower.where(user_id: current_user.id)
   end
 
   def show
@@ -13,16 +13,23 @@ class FollowersController < ApplicationController
 
   def create
     @follower = Follower.new
-    @follower.user_id = params[:user_id]
-    @follower.friend_id = params[:friend_id]
-
-    if @follower.save
-      redirect_to "/followers", :notice => "Follower created successfully."
+    @follower.user_id = current_user.id
+    new_friend = User.find_by(email: params[:friend_id])
+    if new_friend == nil
+      new_friend = User.find_by(username: params[:friend_id])
+    end
+    if new_friend == nil
+      redirect_to '/followers/new', :notice => "User not found"
     else
-      render 'new'
+      @follower.friend_id = new_friend.id
+
+      if @follower.save
+        redirect_to "/followers", :notice => "Follower created successfully."
+      else
+        render 'new'
+      end
     end
   end
-
   def edit
     @follower = Follower.find(params[:id])
   end

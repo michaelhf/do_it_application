@@ -22,18 +22,20 @@
   <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Item #<%= item.id %></h3>
+        <h3 class="panel-title"><%= item.title %></h3>
       </div>
       <div class="panel-body">
         <dl>
-          <dt>User</dt>
-          <dd><%= item.user_id %></dd>
 
-          <dt>Finished</dt>
-          <dd><%= item.finished %></dd>
 
-          <dt>Title</dt>
-          <dd><%= item.title %></dd>
+
+          <dt>Steps</dt>
+<% Step.where(item_id: item.id).order("step_number asc").each do |thing| %>
+            <dd>#<%= thing.step_number %>: <%=thing.detail%></dd>
+
+<% end %>
+<!--           <dt>Finished</dt>
+          <dd><%= item.finished == true %></dd> -->
 
           <dt>Private</dt>
           <dd><%= item.private == true %></dd>
